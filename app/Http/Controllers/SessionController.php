@@ -7,7 +7,13 @@ use Auth;
 
 class SessionController extends Controller
 {
-    //
+
+    public function __construct(){
+        $this->middleware('guest', [
+            'only' => ['create']
+        ]);
+    }
+
     public function create(){
         return view('sessions.create');
     }
@@ -21,7 +27,7 @@ class SessionController extends Controller
 
         if (Auth::attempt($res, $request->has('remember'))) {
             session()->flash('success', '欢迎回来');
-            return redirect()->route('users.show', Auth::user());
+            return redirect()->intended(route('users.show', Auth::user()));
         }else {
             session()->flash('danger', '不好意思，错了');
             return redirect()->back();
