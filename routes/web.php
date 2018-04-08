@@ -24,6 +24,10 @@ Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail'
 Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
 Route::post('password/reset', 'Auth\ResetPasswordController@reset')->name('password.update');
 
+Route::get('login', 'SessionController@create')->name('login');
+Route::post('login', 'SessionController@store')->name('login');
+Route::delete('logout', 'SessionController@destroy')->name('logout');
+
 Route::resource('users', 'UsersController');
 // Route::get('/users', 'UsersController@index')->name('users.index');
 // Route::get('/users/{user}', 'UsersController@show')->name('users.show');
@@ -33,6 +37,6 @@ Route::resource('users', 'UsersController');
 // Route::patch('/users/{user}', 'UsersController@update')->name('users.update');
 // Route::delete('/users/{user}', 'UsersController@destroy')->name('users.destroy');
 
-Route::get('login', 'SessionController@create')->name('login');
-Route::post('login', 'SessionController@store')->name('login');
-Route::delete('logout', 'SessionController@destroy')->name('logout');
+Route::resource('statuses', 'StatusesController', ['only'=>['store', 'destroy']]);
+// Route::post('/statuses', 'StatusesController@store')->name('statuses.store');
+// Route::delete('/statuses/{status}', 'StatusesController@destroy')->name('statuses.destroy');
