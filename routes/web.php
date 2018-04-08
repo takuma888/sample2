@@ -40,3 +40,8 @@ Route::resource('users', 'UsersController');
 Route::resource('statuses', 'StatusesController', ['only'=>['store', 'destroy']]);
 // Route::post('/statuses', 'StatusesController@store')->name('statuses.store');
 // Route::delete('/statuses/{status}', 'StatusesController@destroy')->name('statuses.destroy');
+
+Route::get('/users/{user}/followings', 'UsersController@followings')->name('users.followings');
+Route::get('/users/{user}/followers', 'UsersController@followers')->name('users.followers');
+Route::post('/follow/{u}', 'FollowersController@store')->name('followers.store');
+Route::delete('/unfollow/{u}', 'FollowersController@destroy')->name('followers.destroy');
